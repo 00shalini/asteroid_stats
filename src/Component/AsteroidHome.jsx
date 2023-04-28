@@ -11,6 +11,7 @@ import {
     Legend,
   } from 'chart.js';
 
+
   ChartJS.register(
     CategoryScale,
   LinearScale,
@@ -131,7 +132,7 @@ const AsteroidHome = () => {
         labels,
         datasets: [
           {
-            label: 'Fastest Asteroid',
+            label: 'Fastest Asteroid in km/h',
             data: fastestAsteroid?.map((item) => item),
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
           },
@@ -159,8 +160,8 @@ const AsteroidHome = () => {
         datasets: [
          
           {
-            label: 'Average Size of Asteroid',
-            data: averageSizeOfAsteroid?.map((item) => item),
+            label: 'Average Size of Asteroid in kms',
+            data: averageSizeOfAsteroid?.map((item) => item ),
             backgroundColor: 'rgba(177, 99, 132, 0.5)',
           },
           
@@ -169,11 +170,17 @@ const AsteroidHome = () => {
       
     return (
        <div className='container'>
-        <h2 className='text-center'>Welcome Earthlings</h2>
+        <h2 className='text-center fw-semibold' style={{margin:30}}>Welcome Earthlings</h2>
         <div className='d-flex justify-content-around'>
-           <div><span>Start Date</span> <input className='w-25 h-50' type='date' value={startDate} name='startdate' onChange={(e) => handleStartDate(e)}/></div>
-           <div><span>End Date</span> <input className='w-25 h-50' type='date' value={endDate} name='enddate' onChange={(e) => handleEndDate(e)}/></div>
+           <div><span className='fw-semibold'>Start Date</span> <input className='w-70 h-60' type='date' value={startDate} name='startdate' onChange={(e) => handleStartDate(e)}/></div>
+           <div><span className='fw-semibold'>End Date</span> <input className='w-70 h-60' type='date' value={endDate} name='enddate' onChange={(e) => handleEndDate(e)}/></div>
             <button type='button' className='btn btn-success w-25 h-50' onClick={() => getAsteroidStats()}>Submit</button>
+        </div>
+        <div style={{marginTop:20}}>
+            <ul className='list-group fw-bolder'>Instructions
+               <li class="list-group-item list-group-item-warning">The data will took some to load</li>
+               <li class="list-group-item list-group-item-info">You can see max of 8 data</li>
+            </ul>
         </div>
         <div class="spinner-border" style={{width: '3rem', height: '3rem',display : loading? 'block': 'none', marginTop:50, marginLeft:600 }} role="status">
            <span class="visually-hidden">Loading...</span>
@@ -186,12 +193,7 @@ const AsteroidHome = () => {
             <Bar options={options} data={data4}  style={{maxHeight:400,minHeight:400,border:'2px solid gray', marginTop:30, maxWidth:600,minWidth:600 }}/>
         </div>
        
-        <div>
-            <ul className='list-group'>Instructions
-               <li class="list-group-item list-group-item-warning">The data will took some to load</li>
-               <li class="list-group-item list-group-item-info">You can see max of 8 data</li>
-            </ul>
-        </div>
+        
        </div>
     )
 }
